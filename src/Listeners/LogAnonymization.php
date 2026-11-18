@@ -2,15 +2,13 @@
 
 namespace JeffersonGoncalves\CcpaAuditLog\Listeners;
 
-use JeffersonGoncalves\Ccpa\Events\PersonalDataAnonymized;
 use JeffersonGoncalves\CcpaAuditLog\AuditLogger;
+use JeffersonGoncalves\Privacy\AuditLog\Listeners\LogAnonymization as BaseLogAnonymization;
 
-class LogAnonymization
+class LogAnonymization extends BaseLogAnonymization
 {
-    public function __construct(protected AuditLogger $logger) {}
-
-    public function handle(PersonalDataAnonymized $event): void
+    public function __construct(AuditLogger $logger)
     {
-        $this->logger->record('anonymized', $event->model, $event->columns);
+        parent::__construct($logger);
     }
 }
